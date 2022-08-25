@@ -18,10 +18,11 @@ namespace WebApplication9.Data
 
         public DbSet<WebApplication9.Models.course> course { get; set; }
 
-        public DbSet<WebApplication9.Models.user> user { get; set; }
 
         public DbSet<WebApplication9.Models.batch> batch { get; set; }
 
         public DbSet<WebApplication9.Models.registration> registration { get; set; }
+
+        public DbSet<WebApplication9.Models.userProfile> userProfile { get; set; }
     }
 }

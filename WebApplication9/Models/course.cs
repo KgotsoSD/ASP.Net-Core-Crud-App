@@ -9,6 +9,6 @@ namespace WebApplication9.Models
     {
         public int id { get; set; }
         public string courseName { get; set; }
-        public string duration { get; set; }
+        public int duration { get; set; }
     }
 }

@@ -10,22 +10,22 @@ using WebApplication9.Models;
 
 namespace WebApplication9.Controllers
 {
-    public class userController : Controller
+    public class userProfileController : Controller
     {
         private readonly WebApplication9Context _context;
 
-        public userController(WebApplication9Context context)
+        public userProfileController(WebApplication9Context context)
         {
             _context = context;
         }
 
-        // GET: user
+        // GET: userProfile
         public async Task<IActionResult> Index()
         {
-            return View(await _context.user.ToListAsync());
+            return View(await _context.userProfile.ToListAsync());
         }
 
-        // GET: user/Details/5
+        // GET: userProfile/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace WebApplication9.Controllers
                 return NotFound();
             }
 
-            var user = await _context.user
+            var userProfile = await _context.userProfile
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (user == null)
+            if (userProfile == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(userProfile);
         }
 
-        // GET: user/Create
+        // GET: userProfile/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: user/Create
+        // POST: userProfile/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,firstname,lastname,username,password")] user user)
+        public async Task<IActionResult> Create([Bind("id,firstname,lastname,username,password")] userProfile userProfile)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(userProfile);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userProfile);
         }
 
-        // GET: user/Edit/5
+        // GET: userProfile/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace WebApplication9.Controllers
                 return NotFound();
             }
 
-            var user = await _context.user.FindAsync(id);
-            if (user == null)
+            var userProfile = await _context.userProfile.FindAsync(id);
+            if (userProfile == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(userProfile);
         }
 
-        // POST: user/Edit/5
+        // POST: userProfile/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,firstname,lastname,username,password")] user user)
+        public async Task<IActionResult> Edit(int id, [Bind("id,firstname,lastname,username,password")] userProfile userProfile)
         {
-            if (id != user.id)
+            if (id != userProfile.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace WebApplication9.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(userProfile);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!userExists(user.id))
+                    if (!userProfileExists(userProfile.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace WebApplication9.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(userProfile);
         }
 
-        // GET: user/Delete/5
+        // GET: userProfile/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace WebApplication9.Controllers
                 return NotFound();
             }
 
-            var user = await _context.user
+            var userProfile = await _context.userProfile
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (user == null)
+            if (userProfile == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(userProfile);
         }
 
-        // POST: user/Delete/5
+        // POST: userProfile/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.user.FindAsync(id);
-            _context.user.Remove(user);
+            var userProfile = await _context.userProfile.FindAsync(id);
+            _context.userProfile.Remove(userProfile);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool userExists(int id)
+        private bool userProfileExists(int id)
         {
-            return _context.user.Any(e => e.id == id);
+            return _context.userProfile.Any(e => e.id == id);
         }
     }
 }
